@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import './Section4.css';
+import './section4.css';
 
 export default function Progressbar({ value = 0, description = "" }) {
     const [percent, setPercent] = useState(0);
@@ -18,7 +18,7 @@ export default function Progressbar({ value = 0, description = "" }) {
 
 
     return (
-        <React.Fragment>
+        <>
             <div className="progressbar">
                 <div className="progress-label flex justify-between">
                     <p>{description}</p>
@@ -26,6 +26,6 @@ export default function Progressbar({ value = 0, description = "" }) {
                 </div>
                 <div className="progressbarfill" style={{ width: `${percent}%` }}> </div>
             </div>
-        </React.Fragment>
+        </>
     );
 }
