@@ -1,0 +1,53 @@
+.progressbar{
+    width: 100%;
+    /* height: 30px; */
+    border-bottom: 1px dotted #000;
+    margin-bottom: 10px;
+    text-align: right;
+    background-color: #fff;
+  }
+  .progressbarfill{
+    height: 100%;
+    transition:  width 0.5 ease-out;
+    color: black;
+  }
+
+  .b-left{
+    width: 45% !important;
+  }
+  
+
+  @media screen and (max-width: 600px) {
+
+    .sec4container h2{
+      font-size: 29px;
+    }
+    .sec4main{
+      flex-direction: column;
+      padding: 0 20px;
+    }
+
+    .sec4left, .sec4right{
+      width: 100% !important;
+      margin-bottom: 20px;
+    }
+
+    .sec4left h5{
+      font-size: 28px;
+    }
+
+    .sec4bottom{
+      flex-direction: column;
+    }
+    .b-left{
+      width: 100% !important;
+    }
+    .b-right{
+      width: 100% !important;
+      padding-left: 2rem;
+    }
+
+    .b-right-2{
+      width: 90% !important;
+    }
+  }

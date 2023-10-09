@@ -1,0 +1,112 @@
+.slider {
+    margin: 0 20px;
+    overflow: "hidden";
+    padding: 2rem 0;
+    width: 70%;
+
+}
+
+.sub-slider {
+    position: relative;
+    transition: 0.3s;
+}
+
+.slider-1{
+    border-top-right-radius: 45%;
+    border-top-left-radius: 45%;
+}
+
+.desc-1{
+    border-top-right-radius: 50%;
+    border-top-left-radius: 50%;
+}
+
+.slider-1 img{
+    border-top-right-radius: 50px;
+    border-top-left-radius: 50px;
+}
+
+.slider img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.react-multi-carousel-list {
+    padding: 0rem 0 2rem 0;
+}
+.custom-dot-list-style{
+    gap: 9px;
+    
+}
+.custom-dot-list-style button {
+    background: black;
+}
+.react-multi-carousel-dot{
+    overflow: visible;
+}
+
+.react-multi-carousel-dot.react-multi-carousel-dot--active button {
+    background: black!important;
+    /* width: 15px;
+    height: 15px; */
+    outline: 2px dotted black;
+    border: 2px solid white;
+}
+
+.desc {
+    position: absolute;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    transition: 0.3;
+    visibility: hidden;
+
+}
+
+.sub-slider:hover .desc{
+    transition: 0.5s;
+    visibility: visible;
+    top: 0;
+}
+
+.firstright{
+    width: 45% !important;
+}
+
+
+/* media queris */
+@media screen and (max-width: 600px) {
+    .sec2firstdiv{
+        flex-direction: column;
+        width: 100%;
+        gap: 30px;
+    }
+
+    .firstleft{
+        width: 100% !important;
+    }
+
+    .firstright{
+        width: 100% !important;
+    }
+
+    .slider{
+        width: 75%;
+        margin: 0 auto;
+    }
+
+    .carousel2cont{
+        margin-top: 1rem !important;
+    }
+
+    .carousel-main{
+        width: 100% !important;
+    }
+    
+}

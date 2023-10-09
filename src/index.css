@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap');
+
+*{
+    font-family: 'Playfair Display', serif;
+    overflow-x: hidden;
+}
+
+.hero-background{
+    position: relative;
+    height: 100vh;
+}
+
+video{
+    object-fit: cover;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.overlay{
+    position: absolute;
+    top: 0;
+    z-index: 99;
+    background: rgba(0,0,0,0.3);
+    width: 100%;
+    height: 100%;
+}
+
+.mobile-navbar{
+    display: none;
+}
+
+.mob-right{
+    backdrop-filter: blur(10px);
+}
+
+@media screen and (max-width: 768px) {
+    .navbar-desktop{
+        display: none;
+    }
+
+    .mobile-navbar{
+        display: block;
+    }
+}
