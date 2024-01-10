@@ -29,7 +29,12 @@
 
     .sec4left, .sec4right{
       width: 100% !important;
-      margin-bottom: 20px;
+      margin-bottom: 20px ;
+    }
+
+    .sec4Text{
+      font-size: 25px !important;
+      text-align: center !important;
     }
 
     .sec4left h5{
@@ -49,5 +54,13 @@
 
     .b-right-2{
       width: 90% !important;
+    }
+
+    .sec4Head{
+      font-size: 25px !important;
+    }
+
+    .sec4subText{
+      text-align: center !important;
     }
   }

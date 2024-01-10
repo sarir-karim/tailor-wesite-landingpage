@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "./section2.css";
-import img1 from '../../../assets/section2images/img1.png'
+import axios from "axios";
 
 const responsive = {
     desktop: {
@@ -21,56 +21,42 @@ const responsive = {
         slidesToSlide: 1
     }
 };
-const sliderImageUrl = [
-    //First image url
-    {
-        url:
-            img1,
-        desc: "this this what "
-    },
-    {
-        url:
-            img1,
-        desc: "this this what "
-    },
-    //Second image url
-    {
-        url:
-            img1,
-        desc: "this this what "
-    },
-    //Third image url
-    {
-        url:
-            img1,
-        desc: "this this what "
-    },
 
-    //Fourth image url
-
-    {
-        url:
-            img1,
-        desc: "this this what "
-    }
-];
+const adminHostname = "http://142.93.217.22/";
 const Section2 = () => {
+    const [ourProcess, setOurProcess] = useState()
+    const [processSlide, setProcessSlide] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://142.93.217.22/api/stepProcess/list').then((response) => {
+            setProcessSlide(response.data)
+        }).catch((err) => console.log(err))
+    }, [])
+
+    useEffect(() => {
+        axios
+            .get('http://142.93.217.22/api/ourProcess/list')
+            .then((response) => {
+                setOurProcess(response.data)
+            })
+            .catch((error) => console.error("Error fetching data", error))
+    }, [])
+
     return (
         <>
-            <div className="flex justify-between w-[95%] px-12 py-14 mx-auto sec2firstdiv" >
-                <div className="flex flex-col  w-[40%]  firstleft" data-aos="fade-right"
-                    data-aos-duration="500">
-                    <h5 className='text-[35px] font-[600]'>Individuality  of your design
-                        Create your style </h5>
-                    <p className='text-[#CCA200] text-[22px] italic '>High Quality Tailor</p>
-                </div>
-                <div className="w-[45%] flex-end sm:w-[100%] firstright" data-aos="fade-left">
-                    <p className='text-[#121212] text-[17px]'>Lorem ipsum dolor sit amet consectetur. Massa duis feugiat
-                        id elit. Leo egestas elit feugiat consequat ultrices cursus nulla
-                        viverra. Sit integer ut lectus porttitor ipsum duis accumsan
-                        purus metus. Turpis rhoncus in porttitor turpis. Nulla vestibulum leo consectetur vitae lorem quam lectus.</p>
-                </div>
-            </div>
+            {
+                ourProcess?
+                <div className="flex justify-between w-[95%] px-12 py-14 mx-auto sec2firstdiv" >
+                    <div className="flex flex-col  w-[40%]  firstleft" data-aos="fade-right"
+                        data-aos-duration="500">
+                        <h5 className='text-[35px] font-[600]'>{ourProcess[0].heading}</h5>
+                        <p className='text-[#CCA200] text-[22px] italic '>{ourProcess[0].tagline}</p>
+                    </div>
+                    <div className="w-[45%] flex-end sm:w-[100%] firstright" data-aos="fade-left">
+                        <p className='text-[#121212] text-[17px]'>{ourProcess[0].description}</p>
+                    </div>
+                </div>: <div className="text-center text-black">Loading...</div>
+            }
 
             <div className="carousel2cont mt-[2rem]" >
                 <Carousel
@@ -86,54 +72,24 @@ const Section2 = () => {
                     partialVisible={true}
                     dotListClass="custom-dot-list-style"
                 >
-                    <div className="slider">
-                        <div className="sub-slider slider-1  mb-1">
-                            <img src={img1} alt="movie" />
-                            <div className="desc desc-1"  >
-                                This is what
+
+                    {processSlide.map((data) => {
+                        const { id, image, name, tagline, description } = data;
+                        return (
+                            <div className="slider" key={id}>
+                                <div className="sub-slider slider-1  mb-1">
+                                    <img src={adminHostname + image} className="h-100" alt="movie" />
+                                    <div className="desc desc-1"  >
+                                        {description}
+                                    </div>
+                                </div>
+                                <div className="text-center">
+                                    <h5 className="text-[19px] text-[#121212] font-[600]">{name}</h5>
+                                    <p className="text-[#CCA200] text-[15px] font-[500]">{tagline}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div className="text-center">
-                            <h5 className="text-[19px] text-[#121212] font-[600]">Singer Machine</h5>
-                            <p className="text-[#CCA200] text-[15px] font-[500]">Custom Design</p>
-                        </div>
-                    </div>
-                    <div className="slider">
-                        <div className="sub-slider mb-1">
-                            <img src={img1} alt="movie" />
-                            <div className="desc"  >
-                                This is what
-                            </div>
-                        </div>
-                        <div className="text-center">
-                            <h5 className="text-[19px] text-[#121212] font-[600]">Singer Machine</h5>
-                            <p className="text-[#CCA200] text-[15px] font-[500]">Custom Design</p>
-                        </div>
-                    </div>
-                    <div className="slider">
-                        <div className="sub-slider mb-1">
-                            <img src={img1} alt="movie" />
-                            <div className="desc"  >
-                                This is what
-                            </div>
-                        </div>
-                        <div className="text-center">
-                            <h5 className="text-[19px] text-[#121212] font-[600]">Singer Machine</h5>
-                            <p className="text-[#CCA200] text-[15px] font-[500]">Custom Design</p>
-                        </div>
-                    </div>
-                    <div className="slider">
-                        <div className="sub-slider slider-1 mb-1">
-                            <img src={img1} alt="movie" />
-                            <div className="desc desc-1"  >
-                                This is what
-                            </div>
-                        </div>
-                        <div className="text-center">
-                            <h5 className="text-[19px] text-[#121212] font-[600]">Singer Machine</h5>
-                            <p className="text-[#CCA200] text-[15px] font-[500]">Custom Design</p>
-                        </div>
-                    </div>
+                        )
+                    })}
                 </Carousel>
             </div>
         </>

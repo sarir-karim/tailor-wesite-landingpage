@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "./section3.css";
-import img1 from '../../../assets/sec3imgs/img1.png'
+import img1 from '../../../assets/sec3imgs/img1.png';
+import axios from "axios";
+
 const responsive = {
     desktop: {
         breakpoint: { max: 3000, min: 1024 },
@@ -20,27 +22,18 @@ const responsive = {
         slidesToSlide: 1
     }
 };
-const sliderImageUrl = [
-    //First image url
-    {
-        url:
-            "https://media.istockphoto.com/id/543079836/photo/measuring-front-of-jacket.jpg?s=612x612&w=0&k=20&c=1iBAoOGAHH8_uQMmX52lV0GfVqsN4Z428k6Mmft8xYE=",
-        desc: "this this what "
-    },
-    {
-        url:
-            img1,
-        desc: "this this what "
-    },
-    //Second image url
-    {
-        url:
-            "https://media.istockphoto.com/id/543079836/photo/measuring-front-of-jacket.jpg?s=612x612&w=0&k=20&c=1iBAoOGAHH8_uQMmX52lV0GfVqsN4Z428k6Mmft8xYE=",
-        desc: "this this what "
-    },
-];
+
+const adminHostname  = "http://142.93.217.22/";
 const Section3 = () => {
     const [activeIndex, setActiveIndex] = useState(null);
+
+    const [design, setDesign] = useState([])
+
+    useEffect(() => {
+        axios.get('http://142.93.217.22/api/design/list').then((response) => {
+            setDesign(response.data)
+        }).catch((err) => console.log("Error in section3",err))
+    }, [])
 
     const toggleDesc = (index) => {
         setActiveIndex(activeIndex === index ? null : index);
@@ -67,19 +60,19 @@ const Section3 = () => {
                     partialVisible={true}
                     dotListClass="custom-dot-list-style"
                 >
-                    {sliderImageUrl.map((data, index) => {
+                    {design.map((data, index) => {
                         return (
                             <div className="slider3" key={index}>
                                 <div className="sub-slider3 mb-1 h-72" onClick={() => toggleDesc(index)}>
-                                    <img src={data.url} alt="movie" />
+                                    <img src={adminHostname + data.design_thumbnail} alt="movie" />
                                     <div className={`desc3 ${index === activeIndex ? "visible" : "hidden"
                                         }`} >
-                                        {data.desc}
+                                        {data.link  }
                                     </div>
                                 </div>
                                 <div className="text-lef pl-2">
-                                    <h5 className="text-[19px] text-[#121212] font-[400]">Colorful & fashionable wardrobe</h5>
-                                    <p className="text-[#CCA200] text-[15px] font-[400]">April 20, 2023 / Tailors</p>
+                                    <h5 className="text-[19px] text-[#121212] font-[400]">{data.name}</h5>
+                                    <p className="text-[#CCA200] text-[15px] font-[400]">{data.tagline}</p>
                                 </div>
                             </div>
                         );

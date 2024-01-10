@@ -1,3 +1,8 @@
+.formMain{
+   padding-left: 40px;
+   padding-right: 40px;
+}
+
 @media screen and (max-width: 600px) {
     .sec6main{
         flex-direction: column;
@@ -11,5 +16,12 @@
     .sec6right{
         width: 100% !important;
     }
-    
+    .formMain{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .formText{
+        width: 100% !important;
+    }
 }

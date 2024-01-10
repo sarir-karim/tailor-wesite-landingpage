@@ -1,7 +1,9 @@
-import React from "react";
+
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "./section5.css";
+import { useState, useEffect } from "react";
+import axios from "axios";
 const responsive = {
     desktop: {
         breakpoint: { max: 3000, min: 1024 },
@@ -19,30 +21,21 @@ const responsive = {
         slidesToSlide: 1
     }
 };
-const sliderImageUrl = [
-    //First image url
-    {
-        cdesc: "“Lorem ipsum dolor sit amet  consectetur. Leo digniorem ipsum dolor sit amet consectetur.",
-        name: "Seema",
-        img: "https://media.istockphoto.com/id/1300972574/photo/millennial-male-team-leader-organize-virtual-workshop-with-employees-online.webp?b=1&s=612x612&w=0&k=20&c=jc27S9EzcqPWne91HrtCaveIe8qazVsGhDjYRdwNLoU="
-    },
-    {
-        cdesc: "“Lorem ipsum dolor sit amet  consectetur. Leo digniorem ipsum dolor sit amet consectetur.",
-        name: "Karan",
-        img: "https://media.istockphoto.com/id/1388253782/photo/positive-successful-millennial-business-professional-man-head-shot-portrait.webp?b=1&s=612x612&w=0&k=20&c=VsTsa0kjyZ7ALe-nyKAUfynyRxZo8H4LRMdu_ecPuOY="
-    },
-    {
-        cdesc: "“Lorem ipsum dolor sit amet  consectetur. Leo digniorem ipsum dolor sit amet consectetur.",
-        name: "Amar",
-        img: "https://cdn.pixabay.com/photo/2016/11/22/21/42/woman-1850703_640.jpg"
-    },
 
-];
+const adminHostname = "http://142.93.217.22/";
+
 const Section5 = () => {
+    const [testimonial, setTestimonail] = useState([])
+    useEffect(() => {
+        axios.get('http://142.93.217.22/api/testimonial/list').then((response) => {
+            setTestimonail(response.data)
+
+        }).catch((err) => console.log("Error in section3", err))
+    }, [])
     return (
         <>
             <div className="flex flex-col items-center pt-16 sec5container">
-                <h2 className="text-[35px] font-[700]">Here What Our Client Say </h2>
+                <h2 className="text-[35px] font-[700] clinetHead">Here What Our Client Say </h2>
                 <p className="text-[19px] italic text-[#CCA200] font-[500]">High Quality Tailor </p>
             </div>
 
@@ -61,15 +54,15 @@ const Section5 = () => {
                     partialVisible={true}
                     dotListClass="custom-dot-list-style"
                 >
-                    {sliderImageUrl.map((data, index) => {
+                    {testimonial.map(data => {
                         return (
-                            <div className="slider5" key={index} >
+                            <div className="slider5" key={data.id} >
                                 <div className="sub-slider5 mb-1 border py-4 px-3">
-                                    <p>{data.cdesc}</p>
-                                    <p className="text-[#C2B271] pt-3">{data.name}</p>
+                                    <p>{data.name}</p>
+                                    <p className="text-[#C2B271] pt-3">{data?.description}</p>
                                 </div>
                                 <div className="desc5"  >
-                                    <img src={data.img} alt="" />
+                                    <img src={adminHostname + data.client_pic} alt="" />
                                 </div>
                             </div>
                         );
