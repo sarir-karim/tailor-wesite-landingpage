@@ -33,9 +33,6 @@ const Section6 = () => {
         e.preventDefault();
         if (Object.values(formData).some(value => !value.trim())) {
             setShowToastEmptyFields(true);
-            setTimeout(() => {
-                setShowToastEmptyFields(false);
-            }, 1000);
             return;
         }
 
@@ -59,11 +56,6 @@ const Section6 = () => {
                 });
 
 
-                setTimeout(() => {
-                    setShowToast(false);
-                }, 3000);
-
-
             })
             .catch((error) => console.log("error", error))
     }
@@ -83,7 +75,7 @@ const Section6 = () => {
                 </div>
 
                 <div className="w-[50%] sec6right">
-                    <div className="flex items-center justify-center">
+                    <div className="flex items-center justify-center relative">
                         <div className="max-w-md w-full py-6  formMain bg-white rounded-lg shadow-lg">
                             <h3 className='text-[28px] font-[700] pb-3'>Send us your query</h3>
                             <form onSubmit={handleSubmit}>
@@ -151,13 +143,19 @@ const Section6 = () => {
                             </form>
 
                             {showToastEmptyFields && (
-                                <div style={{ position: 'fixed', bottom: '34rem', right: '20px', background: 'red', color: '#fff', borderRadius: "5px", padding: '10px' }}>
-                                    Please fill in all fields.
+                                <div className='h-24 w-[50%] z-50 flex flex-col items-center gap-4 transition-opacity' style={{ position: 'absolute  ', bottom: '15rem', right: '10rem', background: 'red', borderRadius: "5px", color: '#fff', padding: '10px' }}>
+                                    <p> Please fill all the fields</p>
+                                    <div className="flex justify-center">
+                                        <button className='bg-white text-black px-5 rounded-md text-xl' onClick={() => setShowToastEmptyFields(false)}>Okay</button>
+                                    </div>
                                 </div>
                             )}
                             {showToast && (
-                                <div style={{ position: 'fixed  ', bottom: '34rem', right: '20px', background: '#001F12', borderRadius: "5px", color: '#fff', padding: '10px' }}>
-                                    Form submitted successfully!
+                                <div className='h-24 w-[50%] z-50 flex flex-col items-center gap-4 transition-all' style={{ position: 'absolute  ', bottom: '15rem', right: '10rem', background: '#001F12', borderRadius: "5px", color: '#fff', padding: '10px' }}>
+                                    <p> Form submitted successfully!</p>
+                                    <div className="flex justify-center">
+                                        <button className='bg-white text-black px-5 rounded-md text-xl' onClick={() => setShowToast(false)}>Okay</button>
+                                    </div>
                                 </div>
                             )}
                         </div>

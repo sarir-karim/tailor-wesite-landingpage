@@ -23,6 +23,7 @@ const responsive = {
 };
 
 const adminHostname = "http://142.93.217.22/";
+
 const Section2 = () => {
     const [ourProcess, setOurProcess] = useState()
     const [processSlide, setProcessSlide] = useState([]);
